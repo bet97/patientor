@@ -48,13 +48,12 @@ const PatientSingleView = () => {
     };
       void fetchPatient();
 
-  }, []);
+  }, [id, dispatch]);
 
   const submitNewEntry = async (entryValues: EntryFormValues) => {
     if (!patient) return null;
-    const values = {...entryValues};
     try {
-        const { data: newPatientData } = await axios.post<Patient>(`${apiBaseUrl}/patients/${patient.id}/entries`, values);
+        const { data: newPatientData } = await axios.post<Patient>(`${apiBaseUrl}/patients/${patient.id}/entries`, entryValues);
         dispatch(addPatientEntry(newPatientData));
         // eslint-disable-next-line no-console
         console.log(entryValues, "entry");
