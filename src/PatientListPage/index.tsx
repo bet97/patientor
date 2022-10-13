@@ -3,7 +3,7 @@ import axios from "axios";
 import { Box, Table, Button, TableHead, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { PatientFormValues } from "../AddPatientModal/AddPatientForm";
-import AddPatientModal from "../AddPatientModal";
+import { AddPatientModal } from "../AddPatientModal"; 
 import { Patient } from "../types";
 import { apiBaseUrl } from "../constants";
 import HealthRatingBar from "../components/HealthRatingBar";
@@ -62,8 +62,8 @@ const PatientListPage = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {Object.values(patients).map((patient: Patient) => (
-            <TableRow key={patient.id}>
+          {Object.values(patients).map((patient: Patient, i) => (
+            <TableRow key={i}>
               <TableCell><Link to={`/patients/${patient.id}`}>{patient.name}</Link></TableCell>
               <TableCell>{patient.gender}</TableCell>
               <TableCell>{patient.occupation}</TableCell>

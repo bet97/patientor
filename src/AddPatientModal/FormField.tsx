@@ -7,7 +7,7 @@ import {
   TextField as TextFieldMUI,
   Typography,
 } from "@material-ui/core";
-import { Diagnosis, Gender } from "../types";
+import { Diagnosis, Gender, TypeOptions } from "../types";
 import { InputLabel } from "@material-ui/core";
 import Input from '@material-ui/core/Input';
 
@@ -24,9 +24,41 @@ type SelectFieldProps = {
   options: GenderOption[];
 };
 
-const FormikSelect = ({ field, ...props }: FieldProps) => <Select {...field} {...props} />;
+// structure of a single option
+export type TypeEntryOptions = {
+  value: TypeOptions;
+  label: string;
+};
 
+// props for select field component
+type SelectEntryProps = {
+  name: string;
+  label: string;
+  options: TypeEntryOptions[];
+};
+
+const FormikSelect = ({ field, ...props }: FieldProps) => <Select {...field} {...props} />;
+ 
 export const SelectField = ({ name, label, options }: SelectFieldProps) => (
+  <>
+    <InputLabel>{label}</InputLabel>
+    <Field
+      fullWidth
+      style={{ marginBottom: "0.5em" }}
+      label={label}
+      component={FormikSelect}
+      name={name}
+    >
+      {options.map((option) => (
+        <MenuItem key={option.value} value={option.value}>
+          {option.label || option.value}
+        </MenuItem>
+      ))}
+    </Field>
+  </>
+);
+
+export const SelectEntryTypeField = ({ name, label, options }: SelectEntryProps) => (
   <>
     <InputLabel>{label}</InputLabel>
     <Field

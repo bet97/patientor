@@ -9,14 +9,15 @@ import PatientListPage from "./PatientListPage";
 import { Typography } from "@material-ui/core";
 import PatientSingleView from "./PatienSingleView";
 import { setPatientList } from "./state";
-
 import { Diagnosis } from "./types";
 import { setDiagnoses } from "./state";
 
 const App = () => {
   const [, dispatch] = useStateValue();
-  
+  // const { id } = useParams<{ id: string }>();
+
   React.useEffect(() => {
+
     void axios.get<void>(`${apiBaseUrl}/ping`);
 
     const fetchPatientList = async () => {
@@ -34,6 +35,7 @@ const App = () => {
       }
     };
     void fetchPatientList();
+
   }, [dispatch]);
 
   return (

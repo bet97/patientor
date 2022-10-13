@@ -109,6 +109,6 @@ export const AddPatientForm = ({ onSubmit, onCancel }: Props) => {
       }}
     </Formik>
   );
-};
+}; 
 
 export default AddPatientForm;
